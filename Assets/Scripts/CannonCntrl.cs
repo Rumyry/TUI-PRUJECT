@@ -102,7 +102,7 @@ public class CannonCntrl : MonoBehaviour
             if (difY < -difY) { difY = -difY; }
             float maxx = difX;
             if (difY > maxx) { maxx = difY; }
-            cannon.transform.rotation = Quaternion.Slerp(cannon.transform.rotation, target, 0.0015f / maxx);
+            cannon.transform.rotation = Quaternion.Slerp(cannon.transform.rotation, target, 0.8f / maxx * Time.deltaTime);
             print(speed);
             
             print(difX);
