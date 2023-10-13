@@ -10,11 +10,20 @@ public class Planecntrl : MonoBehaviour
     public float speed;
     public float x, y, z;
     int work = 1;
+    public GameObject planeSprite;
     float ff = 0f;
     void Start()
     {
         PlayerPrefs.SetFloat("SpeedPlane", speed);
         PlayerPrefs.SetInt("shoot", 1);
+        if (speed > 0)
+        {
+            planeSprite.transform.rotation = Quaternion.Euler(0 - planeSprite.transform.rotation.x, 0f - planeSprite.transform.rotation.y, 0 - planeSprite.transform.rotation.z);
+        }
+        else
+        {
+            planeSprite.transform.rotation = Quaternion.Euler(180f - planeSprite.transform.rotation.x, 0f - planeSprite.transform.rotation.y, 180f - planeSprite.transform.rotation.z);
+        }
         plane.transform.position = new Vector3(x, y, z);
         if (plane.transform.position == new Vector3(0, -11.11f, 0))
         {
@@ -24,6 +33,7 @@ public class Planecntrl : MonoBehaviour
     void Update()
     {
         speed = PlayerPrefs.GetFloat("SpeedPlane");
+        
         if (work!=0 )
         {
             plane.transform.position = new Vector3(plane.transform.position.x + speed * Time.deltaTime, plane.transform.position.y, plane.transform.position.z);
@@ -38,6 +48,15 @@ public class Planecntrl : MonoBehaviour
             x = Random.Range(-z + 50, z - 50);
             y = Random.Range(10, 50);
             PlayerPrefs.SetFloat("SpeedPlane", Random.Range(-30, 30)) ;
+            speed = PlayerPrefs.GetFloat("SpeedPlane");
+            if (speed > 0)
+            {
+                planeSprite.transform.rotation = Quaternion.Euler(0 - planeSprite.transform.rotation.x, 0f - planeSprite.transform.rotation.y, 0 - planeSprite.transform.rotation.z);
+            }
+            else
+            {
+                planeSprite.transform.rotation = Quaternion.Euler(180f - planeSprite.transform.rotation.x, 0f - planeSprite.transform.rotation.y, 180f - planeSprite.transform.rotation.z);
+            }
             if (y > z / 3.0f) { y = z / 3.0f; }
             plane.transform.position = new Vector3(x, y, z);
             PlayerPrefs.SetInt("shoot", 1);
