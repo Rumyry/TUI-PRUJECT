@@ -10,6 +10,7 @@ public class Planecntrl : MonoBehaviour
     public float speed;
     public float x, y, z;
     int work = 1;
+    float ff = 0f;
     void Start()
     {
         PlayerPrefs.SetFloat("SpeedPlane", speed);
@@ -32,6 +33,7 @@ public class Planecntrl : MonoBehaviour
     {
         if (collision.tag == "bullet")
         {
+            PlayerPrefs.SetInt("res", 1);
             z = Random.Range(50, 200);
             x = Random.Range(-z + 50, z - 50);
             y = Random.Range(10, 50);

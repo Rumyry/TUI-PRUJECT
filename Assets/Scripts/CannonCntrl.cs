@@ -11,7 +11,6 @@ public class CannonCntrl : MonoBehaviour
     public GameObject cannon;
     public GameObject plane;
     public GameObject bullet;
-    public float speedBullet;
     public float speed;
     Quaternion target;
 
@@ -29,7 +28,7 @@ public class CannonCntrl : MonoBehaviour
         {
             double planeSpeed, bulletSpeed;
             planeSpeed = PlayerPrefs.GetFloat("SpeedPlane");
-            bulletSpeed = speedBullet;
+            bulletSpeed = PlayerPrefs.GetFloat("speedBullet"); ;
 
             double xPlane = plane.transform.position.x, yPlane = plane.transform.position.y, zPlane = plane.transform.position.z, discr = 0f;
             bool case1 = false;
@@ -119,6 +118,7 @@ public class CannonCntrl : MonoBehaviour
     }
     void Shoot()
     {
+        PlayerPrefs.SetInt("res", 0);
         PlayerPrefs.SetInt("shoot", 0);
         Instantiate(bullet, new Vector3(0, 0, 0), Quaternion.identity);
     }

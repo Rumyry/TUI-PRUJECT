@@ -357,6 +357,7 @@
 "Assets/Scripts/GameCntrl.cs"
 "Assets/Scripts/Menucntrl.cs"
 "Assets/Scripts/Planecntrl.cs"
+"Assets/Scripts/Trackcntrl.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs"
