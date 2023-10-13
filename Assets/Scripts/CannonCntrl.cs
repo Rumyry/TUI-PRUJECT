@@ -92,8 +92,7 @@ public class CannonCntrl : MonoBehaviour
             if (distz != 0) { tanX = disty / distz; }
             double RotationX = Math.Atan(tanX);
             float x = (float)(RotationX / ((Math.PI / 180.0f)));
-            target = Quaternion.Euler(-x, y, cannon.transform.rotation.z);
-
+            target = Quaternion.Euler(90f - x, y, cannon.transform.rotation.z);
 
             float difX = cannon.transform.rotation.x - target.x;
             if (difX < -difX) { difX = -difX; }
@@ -101,7 +100,9 @@ public class CannonCntrl : MonoBehaviour
             if (difY < -difY) { difY = -difY; }
             float maxx = difX;
             if (difY > maxx) { maxx = difY; }
+            
             cannon.transform.rotation = Quaternion.Slerp(cannon.transform.rotation, target, 0.8f / maxx * Time.deltaTime);
+            
             print(speed);
             
             print(difX);
@@ -110,16 +111,12 @@ public class CannonCntrl : MonoBehaviour
             int shoot = PlayerPrefs.GetInt("shoot");
             if ((difX <= 0.001f) && (difY <= 0.001f) && reload <= 0)
             {
+                PlayerPrefs.SetInt("res", 0);
+                PlayerPrefs.SetInt("shoot", 0);
+                Instantiate(bullet, new Vector3(0, 0, 0), Quaternion.Euler(-x, y, cannon.transform.rotation.z));
                 PlayerPrefs.SetInt("cnt", cnt + 1);
-                Shoot();
                 reload = 0f;
             }
         }
-    }
-    void Shoot()
-    {
-        PlayerPrefs.SetInt("res", 0);
-        PlayerPrefs.SetInt("shoot", 0);
-        Instantiate(bullet, new Vector3(0, 0, 0), Quaternion.identity);
     }
 }

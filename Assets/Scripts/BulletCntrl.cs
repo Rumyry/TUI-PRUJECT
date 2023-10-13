@@ -49,7 +49,7 @@ public class BulletCntrl : MonoBehaviour
         }
         else
         {
-            tim = 0.1f;
+            tim = 0.02f;
         }
 
         
