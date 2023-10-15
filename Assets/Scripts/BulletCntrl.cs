@@ -7,7 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class BulletCntrl : MonoBehaviour
 {
-    public float speed;
+    float speedBullet;
     public GameObject plane;
     public GameObject bullet;
     Vector3 target;
@@ -15,7 +15,7 @@ public class BulletCntrl : MonoBehaviour
     int destr = 1;
     void Start()
     {
-        PlayerPrefs.SetFloat("speedBullet", speed);
+        speedBullet = PlayerPrefs.GetFloat("speedBullet");
         PlayerPrefs.SetFloat("bulletX", -1);
         PlayerPrefs.SetFloat("bulletY", -1);
         PlayerPrefs.SetFloat("bulletZ", -1);
@@ -37,7 +37,7 @@ public class BulletCntrl : MonoBehaviour
             PlayerPrefs.SetFloat("bulletZ", transform.position.z);
         }
         tim -= Time.deltaTime;
-        bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, target, speed * Time.deltaTime);
+        bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, target, speedBullet * Time.deltaTime);
         if (bullet.transform.position == target && destr == 1) { if (tim <= 0) 
             {
                 PlayerPrefs.SetFloat("bulletX", -1);

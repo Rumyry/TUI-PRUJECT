@@ -7,16 +7,15 @@ using UnityEngine;
 public class Planecntrl : MonoBehaviour
 {
     public GameObject plane;
-    public float speed;
+    float speedPlane;
     public float x, y, z;
-    int work = 1;
     public GameObject planeSprite;
-    float ff = 0f;
     void Start()
     {
-        PlayerPrefs.SetFloat("SpeedPlane", speed);
+        speedPlane = PlayerPrefs.GetFloat("speedPlane");
+        
         PlayerPrefs.SetInt("shoot", 1);
-        if (speed > 0)
+        if (speedPlane > 0)
         {
             planeSprite.transform.rotation = Quaternion.Euler(0 - planeSprite.transform.rotation.x, 0f - planeSprite.transform.rotation.y, 0 - planeSprite.transform.rotation.z);
         }
@@ -25,31 +24,24 @@ public class Planecntrl : MonoBehaviour
             planeSprite.transform.rotation = Quaternion.Euler(180f - planeSprite.transform.rotation.x, 0f - planeSprite.transform.rotation.y, 180f - planeSprite.transform.rotation.z);
         }
         plane.transform.position = new Vector3(x, y, z);
-        if (plane.transform.position == new Vector3(0, -11.11f, 0))
-        {
-            work = 0;
-        }
     }
     void Update()
     {
-        speed = PlayerPrefs.GetFloat("SpeedPlane");
-        
-        if (work!=0 )
-        {
-            plane.transform.position = new Vector3(plane.transform.position.x + speed * Time.deltaTime, plane.transform.position.y, plane.transform.position.z);
-        }
+        print(speedPlane);
+        plane.transform.position = new Vector3(plane.transform.position.x + speedPlane * Time.deltaTime, plane.transform.position.y, plane.transform.position.z);
     }
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "bullet")
         {
             PlayerPrefs.SetInt("res", 1);
-            z = Random.Range(50, 200);
-            x = Random.Range(-z + 50, z - 50);
-            y = Random.Range(10, 50);
-            PlayerPrefs.SetFloat("SpeedPlane", Random.Range(-30, 30)) ;
-            speed = PlayerPrefs.GetFloat("SpeedPlane");
-            if (speed > 0)
+            PlayerPrefs.SetFloat("speedPlane", Random.Range(-30, 30));
+            speedPlane = PlayerPrefs.GetFloat("speedPlane");
+            z = Random.Range(50, 250);
+            x = Random.Range(-z + 70, z - 70);
+            y = Random.Range(10, 75);
+
+            if (speedPlane > 0)
             {
                 planeSprite.transform.rotation = Quaternion.Euler(0 - planeSprite.transform.rotation.x, 0f - planeSprite.transform.rotation.y, 0 - planeSprite.transform.rotation.z);
             }

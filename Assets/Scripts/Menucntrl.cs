@@ -10,6 +10,10 @@ public class Menucntrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetInt("cnt", 0);
+        PlayerPrefs.SetFloat("speedBullet", 100f);
+        PlayerPrefs.SetFloat("speedCannon", 3f);
+        PlayerPrefs.SetFloat("speedPlane", 20f);
         print("Start");
         PlayBtn.onClick.AddListener(delegate { LoadScene("Game"); });
         QuitBtn.onClick.AddListener(delegate { quit(); });

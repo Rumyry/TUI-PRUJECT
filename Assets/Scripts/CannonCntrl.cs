@@ -11,13 +11,14 @@ public class CannonCntrl : MonoBehaviour
     public GameObject cannon;
     public GameObject plane;
     public GameObject bullet;
-    public float speed;
+    float speedCannon;
     Quaternion target;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        speedCannon = PlayerPrefs.GetFloat("speedCannon");
     }
     public float reload = 0;
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class CannonCntrl : MonoBehaviour
         if (IsShoot == 1)
         {
             double planeSpeed, bulletSpeed;
-            planeSpeed = PlayerPrefs.GetFloat("SpeedPlane");
+            planeSpeed = PlayerPrefs.GetFloat("speedPlane");
             bulletSpeed = PlayerPrefs.GetFloat("speedBullet"); ;
 
             double xPlane = plane.transform.position.x, yPlane = plane.transform.position.y, zPlane = plane.transform.position.z, discr = 0f;
@@ -76,7 +77,6 @@ public class CannonCntrl : MonoBehaviour
 
 
 
-            reload -= Time.deltaTime;
             double distz = targt.z - cannon.transform.position.z;
             double disty = targt.y - cannon.transform.position.y;
             double distx = targt.x - cannon.transform.position.x;
@@ -103,13 +103,10 @@ public class CannonCntrl : MonoBehaviour
             
             cannon.transform.rotation = Quaternion.Slerp(cannon.transform.rotation, target, 0.8f / maxx * Time.deltaTime);
             
-            print(speed);
             
-            print(difX);
-            print(difY);
             int cnt = PlayerPrefs.GetInt("cnt");
             int shoot = PlayerPrefs.GetInt("shoot");
-            if ((difX <= 0.001f) && (difY <= 0.001f) && reload <= 0)
+            if ((difX <= 0.001f) && (difY <= 0.001f))
             {
                 PlayerPrefs.SetInt("res", 0);
                 PlayerPrefs.SetInt("shoot", 0);

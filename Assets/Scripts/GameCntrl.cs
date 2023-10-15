@@ -9,12 +9,10 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject cannon;
     public GameObject view;
     public GameObject plane;
-    public float cannonX, cannonY, cannonZ;
 
     void Start()
     {
-        PlayerPrefs.SetInt("cnt", 0);
-        cannon.transform.position = new Vector3(cannonX, cannonY, cannonZ);
+        cannon.transform.position = new Vector3(0, 0, 0);
     }
     private void Update()
     {
