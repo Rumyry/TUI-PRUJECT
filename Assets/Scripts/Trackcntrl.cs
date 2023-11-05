@@ -3,11 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Trackingcntrl : MonoBehaviour
+public class Trackcntrl : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject plane;
@@ -39,18 +38,39 @@ public class Trackingcntrl : MonoBehaviour
         int sh = PlayerPrefs.GetInt("shoot");
         if (sh == 0)
         {
-            float speedBullet = PlayerPrefs.GetFloat("speedBullet");
-            x = x - PlayerPrefs.GetFloat("x");
-            x *= x;
-            y = y - PlayerPrefs.GetFloat("y");
-            y *= y;
-            z = z - PlayerPrefs.GetFloat("z");
-            z *= z;
-            double ans = Math.Sqrt(x + y + z) / speedBullet;
-            ans *= 100;
-            ans = Math.Truncate(ans);
-            ans /= 100.0f;
-            timetocrash.text = (ans).ToString() + " sec";
+            float IsAuto = PlayerPrefs.GetFloat("IsAuto");
+            if (IsAuto == 0)
+            {
+                float speedBullet = PlayerPrefs.GetFloat("speedBullet");
+                x = x - PlayerPrefs.GetFloat("x");
+                x *= x;
+                y = y - PlayerPrefs.GetFloat("y");
+                y *= y;
+                z = z - PlayerPrefs.GetFloat("z");
+                z *= z;
+                double ans = Math.Sqrt(x + y + z) / speedBullet;
+                ans *= 100;
+                ans = Math.Truncate(ans);
+                ans /= 100.0f;
+                timetocrash.text = (ans).ToString() + " sec";
+            }
+            if (IsAuto == 1)
+            {
+                float speedPlane = PlayerPrefs.GetFloat("speedPlane");
+                float speedBullet = PlayerPrefs.GetFloat("speedBullet");
+                x = x - plane.transform.position.x;
+                x *= x;
+                y = y - plane.transform.position.y;
+                y *= y;
+                z = z - -plane.transform.position.z;
+                z *= z;
+                double ans = Math.Sqrt(x + y + z) / (speedBullet - speedPlane);
+                print(speedBullet - speedPlane);
+                ans *= 100;
+                ans = Math.Truncate(ans);
+                ans /= 100.0f;
+                timetocrash.text = (ans).ToString() + " sec";
+            }
         }
         else { timetocrash.text = "-1 sec"; }
 
