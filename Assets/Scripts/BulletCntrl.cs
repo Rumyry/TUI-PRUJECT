@@ -16,6 +16,7 @@ public class BulletCntrl : MonoBehaviour
     float tim;
     int destr = 1;
     float downSpeed;
+    public GameObject yadro;
     void Start()
     {
         downSpeed = 0f;
@@ -44,8 +45,15 @@ public class BulletCntrl : MonoBehaviour
         float accelerationBullet = PlayerPrefs.GetFloat("accelerationBullet");
         speedBullet += accelerationBullet * Time.deltaTime;
         float IsAuto = PlayerPrefs.GetFloat("IsAuto");
+        
         if (destr == 1)
         {
+            if (PlayerPrefs.GetFloat("UseGravity") != 0)
+            {
+                yadro.transform.position = transform.position;
+                transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            }
+            else { yadro.transform.position = new Vector3(0, -1000, 0); transform.localScale = new Vector3(80f, 80f, 80f); }
             float UseGravity = PlayerPrefs.GetFloat("UseGravity");
             if (UseGravity == 1)
             {
@@ -101,6 +109,7 @@ public class BulletCntrl : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, speedBullet * Time.deltaTime);
             if (PlayerPrefs.GetInt("crash") == 1)
             {
+                print("#");
                 PlayerPrefs.SetInt("crash", 0);
                 PlayerPrefs.SetFloat("bulletX", -1);
                 PlayerPrefs.SetFloat("bulletY", -1);

@@ -18,7 +18,6 @@ public class SpherCntrl : MonoBehaviour
             int crash = PlayerPrefs.GetInt("crash");
             if (crash == 1)
             {
-                PlayerPrefs.SetInt("crash", 0);
                 Destroy(gameObject);
             }
             float speed = PlayerPrefs.GetFloat("speed");
